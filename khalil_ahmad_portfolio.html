@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalil Ahmad — Amazon Brand Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A96E;
+    --gold-light: #E8CB96;
+    --dark: #0A0D14;
+    --dark2: #111420;
+    --dark3: #181D2E;
+    --accent: #3A6FFF;
+    --accent2: #00D4AA;
+    --text: #E8EAF0;
+    --muted: #8890A8;
+    --border: rgba(200,169,110,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,13,20,0.9);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(58,111,255,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(0,212,170,0.05) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 700px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px;
+    background: rgba(200,169,110,0.1);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--gold); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 1.2rem; font-weight: 300;
+    color: var(--muted); line-height: 1.7;
+    max-width: 560px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-cta {
+    margin-top: 40px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--dark); font-weight: 600;
+    border: none; border-radius: 8px;
+    text-decoration: none; font-size: 0.9rem;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(200,169,110,0.35); }
+  .btn-outline {
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--text); font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+    text-decoration: none; font-size: 0.9rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-float {
+    position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeLeft 1s 0.4s ease both;
+  }
+  .stat-pill {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 28px;
+    min-width: 200px;
+    transition: transform 0.3s;
+  }
+  .stat-pill:hover { transform: translateX(-6px); }
+  .stat-pill .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--gold);
+  }
+  .stat-pill .label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeLeft { from{opacity:0;transform:translate(40px,-50%)} to{opacity:1;transform:translate(0,-50%)} }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .section-sub { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 600px; }
+
+  /* METRICS SECTION */
+  .metrics { background: var(--dark2); }
+  .metrics-header { text-align: center; margin-bottom: 60px; }
+  .metrics-header .section-sub { margin: 0 auto; }
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;
+    max-width: 1200px; margin: 0 auto 60px;
+  }
+  .metric-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .metric-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+  .metric-card::after {
+    content:''; position:absolute;
+    bottom:0;left:0;right:0;height:3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    transform: scaleX(0); transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .metric-card:hover::after { transform: scaleX(1); }
+  .metric-card .year-tag {
+    display: inline-block; padding: 3px 10px;
+    background: rgba(200,169,110,0.1); color: var(--gold);
+    border-radius: 100px; font-size: 0.7rem; letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .metric-card .big {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--text);
+  }
+  .metric-card .metric-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+  .metric-card .delta {
+    margin-top: 10px; font-size: 0.8rem; font-weight: 600;
+  }
+  .delta.up { color: var(--accent2); }
+  .delta.down { color: #FF6B6B; }
+
+  /* YoY comparison */
+  .yoy-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .yoy-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 24px;
+  }
+  .yoy-card h4 { font-size: 0.8rem; letter-spacing: 1px; color: var(--muted); margin-bottom: 20px; text-transform: uppercase; }
+  .yoy-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .yoy-row .yr { font-size: 0.75rem; color: var(--muted); width: 50px; }
+  .yoy-bar-wrap { flex: 1; margin: 0 12px; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow:hidden; }
+  .yoy-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .yoy-bar.gold { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .yoy-row .amount { font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+
+  /* PRIME DAY SECTION */
+  .primeday { background: var(--dark); }
+  .primeday-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .pd-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 36px;
+  }
+  .pd-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 24px; }
+  .pd-table { width: 100%; border-collapse: collapse; }
+  .pd-table th {
+    font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-align: left;
+  }
+  .pd-table th:not(:first-child) { text-align: right; }
+  .pd-table td { padding: 10px 0; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .pd-table td:not(:first-child) { text-align: right; }
+  .pd-table td:first-child { color: var(--muted); }
+  .pd-table .pos { color: var(--accent2); font-weight: 600; }
+  .pd-table .neg { color: #FF6B6B; font-weight: 600; }
+
+  /* SKILLS */
+  .skills { background: var(--dark2); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .skill-card {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .skill-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 16px;
+    background: rgba(200,169,110,0.1);
+  }
+  .skill-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+  .skill-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .skill-tags { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag {
+    padding: 3px 10px;
+    background: rgba(58,111,255,0.1);
+    color: #7CA3FF;
+    border-radius: 100px; font-size: 0.7rem;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--dark); }
+  .exp-container { max-width: 900px; margin: 0 auto; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr; gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .exp-item::before {
+    content:''; position: absolute;
+    left: 190px; top: 0; bottom: 0; width: 1px;
+    background: var(--border);
+  }
+  .exp-item::after {
+    content:''; position: absolute;
+    left: 186px; top: 44px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--dark);
+  }
+  .exp-date { font-size: 0.8rem; color: var(--muted); padding-top: 4px; }
+  .exp-company { font-weight: 600; color: var(--gold); font-size: 0.9rem; margin-top: 6px; }
+  .exp-right h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+  .exp-right p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .exp-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .exp-pill {
+    padding: 4px 12px;
+    background: rgba(200,169,110,0.08);
+    border: 1px solid var(--border);
+    color: var(--gold-light);
+    border-radius: 100px; font-size: 0.72rem;
+  }
+
+  /* TOOLS */
+  .tools { background: var(--dark2); }
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .tool-item {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .tool-item:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .tool-item .t-icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .tool-item .t-name { font-size: 0.8rem; font-weight: 500; }
+  .tool-item .t-cat { font-size: 0.7rem; color: var(--muted); margin-top: 3px; }
+
+  /* CTA / CONTACT */
+  .contact {
+    background: linear-gradient(135deg, var(--dark3) 0%, var(--dark2) 100%);
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .contact .section-title { margin: 0 auto 8px; }
+  .contact .section-sub { margin: 0 auto 40px; }
+  .contact-cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .contact-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 30px;
+    display: flex; align-items: center; gap: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none; color: var(--text);
+  }
+  .contact-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .contact-card .c-icon { font-size: 1.3rem; }
+  .contact-card .c-label { font-size: 0.7rem; color: var(--muted); }
+  .contact-card .c-val { font-size: 0.9rem; font-weight: 500; }
+
+  footer {
+    background: var(--dark);
+    padding: 24px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer span { font-size: 0.8rem; color: var(--muted); }
+
+  /* DIVIDER */
+  .divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 20px 0 40px;
+  }
+  .divider.center { margin: 20px auto 40px; }
+
+  @media(max-width:1100px){
+    .hero-float { display:none; }
+    .metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .yoy-grid { grid-template-columns: 1fr; }
+    .primeday-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2,1fr); }
+    .tools-grid { grid-template-columns: repeat(3,1fr); }
+  }
+  @media(max-width:700px){
+    nav { padding: 16px 24px; }
+    .nav-links { display:none; }
+    section { padding: 70px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    footer { padding: 20px 24px; flex-direction:column; gap:8px; text-align:center; }
+    .exp-item { grid-template-columns: 1fr; gap:8px; }
+    .exp-item::before,.exp-item::after { display:none; }
+    .skills-grid,.metrics-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">K·A</div>
+  <div class="nav-links">
+    <a href="#metrics">Metrics</a>
+    <a href="#primeday">Prime Day</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for new opportunities</div>
+    <h1>Khalil<br><span>Ahmad</span></h1>
+    <p class="hero-sub">Amazon Brand Manager with 6+ years scaling marketplace brands from 7 to 8 figures — through data-driven PPC, listing optimization, and Power BI performance dashboards.</p>
+    <div class="hero-cta">
+      <a href="#metrics" class="btn-primary">View Results</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-float">
+    <div class="stat-pill">
+      <div class="val">$82.7M</div>
+      <div class="label">2025 Annual Revenue</div>
+    </div>
+    <div class="stat-pill">
+      <div class="val">+7.5%</div>
+      <div class="label">YoY Revenue Growth</div>
+    </div>
+    <div class="stat-pill">
+      <div class="val">579K</div>
+      <div class="label">Units Sold in 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics" id="metrics">
+  <div class="metrics-header">
+    <div class="section-label">Performance Overview</div>
+    <h2 class="section-title">Brand-Level Results</h2>
+    <div class="divider center"></div>
+    <p class="section-sub">Full-year performance for Lifepro brand across Amazon — managed end-to-end including PPC, listings, inventory, and vendor operations.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="year-tag">2025</div>
+      <div class="big">$82.7M</div>
+      <div class="metric-label">Ordered Revenue</div>
+      <div class="delta up">↑ +7.5% vs 2024</div>
+    </div>
+    <div class="metric-card">
+      <div class="year-tag">2025</div>
+      <div class="big">579,062</div>
+      <div class="metric-label">Ordered Units</div>
+      <div class="delta up">↑ +11.1% vs 2024</div>
+    </div>
+    <div class="metric-card">
+      <div class="year-tag">2024</div>
+      <div class="big">$76.9M</div>
+      <div class="metric-label">Ordered Revenue</div>
+      <div class="delta" style="color:var(--muted)">Prior Year Baseline</div>
+    </div>
+    <div class="metric-card">
+      <div class="year-tag">2024</div>
+      <div class="big">521,274</div>
+      <div class="metric-label">Ordered Units</div>
+      <div class="delta" style="color:var(--muted)">Prior Year Baseline</div>
+    </div>
+  </div>
+
+  <div class="yoy-grid">
+    <div class="yoy-card">
+      <h4>Revenue Comparison</h4>
+      <div class="yoy-row">
+        <span class="yr">2025</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar gold" style="width:100%"></div></div>
+        <span class="amount">$82.7M</span>
+      </div>
+      <div class="yoy-row">
+        <span class="yr">2024</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar" style="width:93%"></div></div>
+        <span class="amount">$76.9M</span>
+      </div>
+      <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); font-size:0.85rem;">
+        <span style="color:var(--accent2); font-weight:600;">+$5.79M growth</span>
+        <span style="color:var(--muted);"> year over year</span>
+      </div>
+    </div>
+    <div class="yoy-card">
+      <h4>Units Comparison</h4>
+      <div class="yoy-row">
+        <span class="yr">2025</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar gold" style="width:100%"></div></div>
+        <span class="amount">579,062</span>
+      </div>
+      <div class="yoy-row">
+        <span class="yr">2024</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar" style="width:90%"></div></div>
+        <span class="amount">521,274</span>
+      </div>
+      <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); font-size:0.85rem;">
+        <span style="color:var(--accent2); font-weight:600;">+57,788 more units</span>
+        <span style="color:var(--muted);"> shipped</span>
+      </div>
+    </div>
+    <div class="yoy-card">
+      <h4>Average Price Trend</h4>
+      <div class="yoy-row">
+        <span class="yr">2025</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar" style="width:97%"></div></div>
+        <span class="amount">$142.82</span>
+      </div>
+      <div class="yoy-row">
+        <span class="yr">2024</span>
+        <div class="yoy-bar-wrap"><div class="yoy-bar gold" style="width:100%"></div></div>
+        <span class="amount">$147.54</span>
+      </div>
+      <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); font-size:0.85rem;">
+        <span style="color:#FF9F7A; font-weight:600;">-$4.72 avg price</span>
+        <span style="color:var(--muted);"> (volume-driven growth strategy)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIME DAY -->
+<section class="primeday" id="primeday">
+  <div class="section-label">Campaign Performance</div>
+  <h2 class="section-title">Prime Day Results</h2>
+  <div class="divider"></div>
+  <p class="section-sub" style="margin-bottom:50px;">Multi-day event performance managed across the full ASIN catalog — including deal strategy, PPC execution, and real-time budget optimization.</p>
+
+  <div class="primeday-grid">
+    <div class="pd-card">
+      <h3>🏆 Top Performing ASINs (2025 vs 2024)</h3>
+      <table class="pd-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>2024 Sales</th>
+            <th>2025 Sales</th>
+            <th>Growth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LP-WVR-BLK</td><td>$287K</td><td>$1,010K</td><td class="pos">+251%</td></tr>
+          <tr><td>LP-WVR-BLU</td><td>$160K</td><td>$363K</td><td class="pos">+127%</td></tr>
+          <tr><td>LP-WVR-WHT</td><td>$46K</td><td>$105K</td><td class="pos">+130%</td></tr>
+          <tr><td>LP-WVR-PRPL</td><td>$35K</td><td>$56K</td><td class="pos">+62%</td></tr>
+          <tr><td>LP-WVR-RED</td><td>$1.6K</td><td>$43K</td><td class="pos">+New</td></tr>
+          <tr><td>LP-WVR-GRY</td><td>$62K</td><td>$0.6K</td><td class="neg">-99%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pd-card">
+      <h3>📊 Event-Level Summary</h3>
+      <table class="pd-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>2024</th>
+            <th>2025</th>
+            <th>Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Day 1 Total Sales</td><td>$3.16M</td><td>$4.29M</td><td class="pos">+36%</td></tr>
+          <tr><td>Day 2 Total Sales</td><td>—</td><td>included</td><td class="pos">+multi-day</td></tr>
+          <tr><td>Top ASIN Revenue</td><td>$288K</td><td>$1.01M</td><td class="pos">+$722K</td></tr>
+          <tr><td>New ASINs Added</td><td>—</td><td>5+</td><td class="pos">expanded</td></tr>
+          <tr><td>Total Event Growth</td><td>$3.16M</td><td>$5.4M+</td><td class="pos">+$1.12M</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:24px; padding:16px; background:rgba(0,212,170,0.06); border:1px solid rgba(0,212,170,0.15); border-radius:10px;">
+        <p style="font-size:0.82rem; color:var(--accent2); font-weight:600;">Key Insight</p>
+        <p style="font-size:0.82rem; color:var(--muted); margin-top:4px; line-height:1.6;">LP-WVR-BLK went from $287K → $1M+ in a single event cycle through deal optimization, PPC scaling, and inventory pre-positioning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="section-label">Core Competencies</div>
+  <h2 class="section-title">What I Bring</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">📈</div>
+      <h4>PPC Campaign Management</h4>
+      <p>Advanced advertising strategies across Sponsored Products, Brands & Display — optimizing ACOS/ROAS targets using Intent wise & Scale Insights.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Intentwise</span>
+        <span class="skill-tag">Scale Insights</span>
+        <span class="skill-tag">Data Rova</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <h4>Data Visualization</h4>
+      <p>Building actionable Power BI dashboards and Google Sheets reports that translate raw performance data into executive-level insights.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Google Sheets</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏪</div>
+      <h4>Vendor Central (VC)</h4>
+      <p>End-to-end Amazon Vendor Central management including purchase orders, vendor-funded promotions, and vendor term negotiations.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Vendor Central</span>
+        <span class="skill-tag">Seller Central</span>
+        <span class="skill-tag">Walmart</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <h4>Listing Optimization & SEO</h4>
+      <p>Keyword research, A/B testing, and competitor benchmarking to maximize product visibility, CTR, and conversion rates.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Helium 10</span>
+        <span class="skill-tag">Data Dive</span>
+        <span class="skill-tag">A/B Testing</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📦</div>
+      <h4>Inventory & Logistics</h4>
+      <p>Multi-platform inventory forecasting, FBA optimization, and order workflow automation to eliminate stockouts and reduce costs.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Seller Cloud</span>
+        <span class="skill-tag">GoFlow</span>
+        <span class="skill-tag">FBA</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🚀</div>
+      <h4>Brand & Product Strategy</h4>
+      <p>Full product lifecycle ownership — from research and launch to rebranding and catalog expansion across Amazon and Walmart.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">Brand Building</span>
+        <span class="skill-tag">Product Launch</span>
+        <span class="skill-tag">Marketplace Growth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-label">Career History</div>
+  <h2 class="section-title">Experience</h2>
+  <div class="divider"></div>
+  <div class="exp-container">
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Mar 2024 — Present</div>
+        <div class="exp-company">Chai Vision<br><span style="font-size:0.75rem;color:var(--muted)">New Jersey, USA (Remote)</span></div>
+      </div>
+      <div class="exp-right">
+        <h3>Amazon Brand Manager</h3>
+        <p>Spearheading growth across Amazon & Walmart marketplaces for Lifepro brand. Managing Vendor Central operations, executing advanced PPC campaigns achieving significant ROI reduction in ACOS, and building Power BI dashboards for executive decision-making.</p>
+        <div class="exp-pills">
+          <span class="exp-pill">Vendor Central</span>
+          <span class="exp-pill">Intentwise</span>
+          <span class="exp-pill">Power BI</span>
+          <span class="exp-pill">Seller Cloud</span>
+          <span class="exp-pill">Monday.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Jun 2021 — Feb 2024</div>
+        <div class="exp-company">Onez Commerce<br><span style="font-size:0.75rem;color:var(--muted)">Lahore, Pakistan</span></div>
+      </div>
+      <div class="exp-right">
+        <h3>Amazon Brand Manager</h3>
+        <p>Directed strategic advertising efforts and achieved consistent growth through data-driven PPC optimization. Led keyword research and competitor analysis, automated inventory workflows with GoFlow, and trained team members on advanced Amazon tools.</p>
+        <div class="exp-pills">
+          <span class="exp-pill">Helium 10</span>
+          <span class="exp-pill">Data Dive</span>
+          <span class="exp-pill">GoFlow</span>
+          <span class="exp-pill">Listing SEO</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Nov 2019 — Jun 2021</div>
+        <div class="exp-company">Onez Commerce<br><span style="font-size:0.75rem;color:var(--muted)">Lahore, Pakistan</span></div>
+      </div>
+      <div class="exp-right">
+        <h3>Amazon Product Manager</h3>
+        <p>Implemented targeted PPC strategies, improved product rankings through SEO-focused listing enhancements, and analyzed advertising data with Power BI to provide actionable campaign insights.</p>
+        <div class="exp-pills">
+          <span class="exp-pill">Data Rova</span>
+          <span class="exp-pill">PPC Strategy</span>
+          <span class="exp-pill">Power BI</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div>
+        <div class="exp-date">Dec 2018 — Nov 2019</div>
+        <div class="exp-company">Nexus de Commerce<br><span style="font-size:0.75rem;color:var(--muted)">Karachi, Pakistan</span></div>
+      </div>
+      <div class="exp-right">
+        <h3>Amazon FBA Specialist & PPC Manager</h3>
+        <p>Managed FBA operations with inventory forecasting and logistics optimization. Increased campaign profitability through refined PPC strategies and leveraged Helium 10 for keyword discovery and ad placement optimization.</p>
+        <div class="exp-pills">
+          <span class="exp-pill">FBA</span>
+          <span class="exp-pill">Helium 10</span>
+          <span class="exp-pill">PPC</span>
+          <span class="exp-pill">Inventory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools">
+  <div style="text-align:center; margin-bottom:50px;">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Tools & Platforms</h2>
+    <div class="divider center"></div>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-item"><div class="t-icon">📊</div><div class="t-name">Power BI</div><div class="t-cat">Analytics</div></div>
+    <div class="tool-item"><div class="t-icon">📗</div><div class="t-name">Excel</div><div class="t-cat">Data Analysis</div></div>
+    <div class="tool-item"><div class="t-icon">🔬</div><div class="t-name">Helium 10</div><div class="t-cat">Research</div></div>
+    <div class="tool-item"><div class="t-icon">🎯</div><div class="t-name">Intentwise</div><div class="t-cat">PPC</div></div>
+    <div class="tool-item"><div class="t-icon">📈</div><div class="t-name">Scale Insights</div><div class="t-cat">PPC</div></div>
+    <div class="tool-item"><div class="t-icon">🔍</div><div class="t-name">Data Dive</div><div class="t-cat">Listing</div></div>
+    <div class="tool-item"><div class="t-icon">📦</div><div class="t-name">Seller Cloud</div><div class="t-cat">Inventory</div></div>
+    <div class="tool-item"><div class="t-icon">🔄</div><div class="t-name">GoFlow</div><div class="t-cat">Automation</div></div>
+    <div class="tool-item"><div class="t-icon">🗂️</div><div class="t-name">Monday.com</div><div class="t-cat">Project Mgmt</div></div>
+    <div class="tool-item"><div class="t-icon">💬</div><div class="t-name">Slack</div><div class="t-cat">Collaboration</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Let's Work Together</div>
+  <h2 class="section-title" style="margin:0 auto 8px;">Get In Touch</h2>
+  <div class="divider center"></div>
+  <p class="section-sub">Open to Amazon Brand Manager roles, consulting engagements, and remote partnerships with growth-focused brands.</p>
+  <div class="contact-cards">
+    <a href="mailto:Ecom.khalilahmad@gmail.com" class="contact-card">
+      <span class="c-icon">✉️</span>
+      <div><div class="c-label">Email</div><div class="c-val">Ecom.khalilahmad@gmail.com</div></div>
+    </a>
+    <a href="tel:+923124422355" class="contact-card">
+      <span class="c-icon">📱</span>
+      <div><div class="c-label">Phone / WhatsApp</div><div class="c-val">+92 312 442 2355</div></div>
+    </a>
+    <div class="contact-card">
+      <span class="c-icon">📍</span>
+      <div><div class="c-label">Location</div><div class="c-val">Lahore, Pakistan (Remote)</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Khalil Ahmad — Amazon Brand Manager</span>
+  <span>6+ Years · $82.7M Revenue Managed · Lifepro Brand</span>
+</footer>
+
+</body>
+</html>
